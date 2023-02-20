@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+main > .inner-content {
+  @media (min-width: $breakpoint-lg) {
+    padding-top: 136px
+  }
+}
+
+.create-task-form {
+  display: block;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: $boxShadowV1;
+  padding: 56px;
+  border-radius: $borderRadiusV1;
+
+  .form-group {
+    input {
+      width: 100%;
+      
+      &[type='submit'] {
+        border-color: transparent;
+      }
+    }
+    &:last-child input {
+      margin-bottom: 0;
+    }
+  }
+}

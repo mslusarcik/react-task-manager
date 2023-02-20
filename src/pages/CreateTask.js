@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { homePathContext } from '../App';
+import './CreateTask.scss';
 
 const CreateTask = ({ updateData }) => {
   console.log('CreateTask component is running.');
@@ -25,8 +26,11 @@ const CreateTask = ({ updateData }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={addNewTask}>
+    <div className='w-full'>
+      <form
+        onSubmit={addNewTask}
+        className='create-task-form'>
+        <h2>Add new task</h2>
         <div className='form-group'>
           <input
             name='taskTitle'
@@ -53,6 +57,7 @@ const CreateTask = ({ updateData }) => {
           <input
             type='submit'
             value='Add task'
+            className='btn btn-primary'
           />
         </div>
       </form>
