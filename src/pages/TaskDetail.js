@@ -1,12 +1,14 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import './TaskDetail.scss';
+import { homePathContext } from '../App';
 
 const TaskDetail = ({ data, removeTask }) => {
   console.log('TaskDetail component is running.');
   const { taskId } = useParams();
   const navigate = useNavigate();
+  const homePath = useContext(homePathContext);
 
   const specificTask = data.find((task) => {
     return task.id === parseInt(taskId);
@@ -14,7 +16,7 @@ const TaskDetail = ({ data, removeTask }) => {
 
   const handleRemoveTask = (taskId) => {
     removeTask(taskId);
-    navigate('/tasks');
+    navigate(`${homePath}/tasks`);
   };
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const TaskDetail = ({ data, removeTask }) => {
     };
 
     if (!specificTask) {
-      navigate('/error');
+      navigate(`${homePath}/error`);
     } else {
       checkExistingId();
     }
@@ -39,7 +41,7 @@ const TaskDetail = ({ data, removeTask }) => {
         <h2>{specificTask.name}</h2>
         <p>{specificTask.description}</p>
         <Link
-          to={`/tasks/`}
+          to={`${homePath}/tasks/`}
           className='btn btn-primary'>
           Back to all tasks
         </Link>

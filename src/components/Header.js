@@ -2,9 +2,13 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import './Header.scss';
 import Logo from '../assets/images/logo.png';
+import { useContext } from 'react';
+import { homePathContext } from '../App';
 
-const Header = ({ homePath }) => {
+const Header = () => {
   console.log('Header component is running.');
+  const homePath = useContext(homePathContext);
+
   return (
     <header>
       <div className='inner-header'>

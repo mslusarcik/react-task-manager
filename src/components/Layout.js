@@ -4,11 +4,11 @@ import Header from './Header';
 import Footer from './Footer';
 import './Layout.scss';
 
-const Layout = ({ homePath }) => {
+const Layout = () => {
   console.log('Layout component is running.');
   return (
     <div className='overall-wrapper'>
-      <Header homePath={homePath} />
+      <Header />
       <main>
         <div className='inner-content'>
           <Outlet />

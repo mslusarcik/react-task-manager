@@ -2,12 +2,14 @@ import React from 'react';
 import Tasks from './pages/Tasks';
 import TaskDetail from './pages/TaskDetail';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import CreateTask from './pages/CreateTask';
 import Layout from './components/Layout';
 import useLocalStorage from './hooks/useLocalStorage';
+
+export const homePathContext = createContext();
 
 const App = () => {
   console.log('App component is running.');
@@ -53,44 +55,46 @@ const App = () => {
 
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={homePath}
-            element={<Layout homePath={homePath} />}>
+      <homePathContext.Provider value={homePath}>
+        <BrowserRouter>
+          <Routes>
             <Route
               path={homePath}
-              element={<Home data={taskData} />}></Route>
-            <Route
-              path={homePath + '/tasks'}
-              element={
-                <Tasks
-                  data={taskData}
-                  updateData={updateData}
-                />
-              }></Route>
-            <Route
-              path={homePath + '/tasks/:taskId'}
-              element={
-                <TaskDetail
-                  data={taskData}
-                  removeTask={removeTask}
-                />
-              }></Route>
-            <Route
-              path={homePath + '/task/create'}
-              element={
-                <CreateTask
-                  data={taskData}
-                  updateData={updateData}
-                />
-              }></Route>
-            <Route
-              path='*'
-              element={<Error />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+              element={<Layout />}>
+              <Route
+                path={homePath}
+                element={<Home data={taskData} />}></Route>
+              <Route
+                path={homePath + '/tasks'}
+                element={
+                  <Tasks
+                    data={taskData}
+                    updateData={updateData}
+                  />
+                }></Route>
+              <Route
+                path={homePath + '/tasks/:taskId'}
+                element={
+                  <TaskDetail
+                    data={taskData}
+                    removeTask={removeTask}
+                  />
+                }></Route>
+              <Route
+                path={homePath + '/task/create'}
+                element={
+                  <CreateTask
+                    data={taskData}
+                    updateData={updateData}
+                  />
+                }></Route>
+              <Route
+                path='*'
+                element={<Error />}></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </homePathContext.Provider>
     </div>
   );
 };

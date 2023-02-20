@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { homePathContext } from '../App';
 
 const CreateTask = ({ updateData }) => {
   console.log('CreateTask component is running.');
   const [nameInput, setNameInput] = useState('');
   const [descInput, setDescInput] = useState('');
   const navigate = useNavigate();
+  const homePath = useContext(homePathContext);
 
   const addNewTask = (e) => {
     e.preventDefault();
@@ -18,7 +21,7 @@ const CreateTask = ({ updateData }) => {
     };
 
     updateData(updatedData);
-    navigate('/tasks');
+    navigate(`${homePath}/tasks`);
   };
 
   return (
