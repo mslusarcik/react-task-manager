@@ -1,0 +1,44 @@
+@import './variables.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #222;
+  font-family: Roboto;
+  font-size: $fontBodySize;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: $primaryColor;
+}
+
+.btn {
+  padding: 8px 30px;
+  min-width: 80px;
+  border-radius: 6px;
+  transition: background-color .35s ease-in-out;
+  font-weight: 500;
+  text-decoration: none !important;
+
+  &.btn-primary {
+    background-color: $primaryColor;
+    color: #222;
+
+    &:hover {
+      background-color: darken($primaryColor, 10%);
+    }
+  }
+}
+
+// a:hover, a:focus {
+//   color: 
+// }
