@@ -1,0 +1,66 @@
+@import '../variables.scss';
+
+.task-item {
+  position: relative;
+  padding: 16px 8px 16px 56px;
+  background-color: #fff;
+  border-bottom: 1px solid rgba($colorGreyV2, .25);
+  padding-left: 60px;
+
+  svg.select-icon.for-completed {
+    display: none;    
+  }
+
+  &.completed {
+
+    * {
+      text-decoration: line-through;
+      color: #33691D;
+      fill: #33691D;
+      opacity: .25;
+    }
+
+    a,
+    svg.select-icon {
+      display: none;
+    }
+
+    svg.select-icon.for-completed {
+      display: block;
+    }
+  }
+
+  h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: #8B828F;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    font-size: 12px;
+
+    svg {
+      margin-left: 4px;
+    }
+  }
+
+  .select-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    display: block;
+    padding: 17px;
+    margin-top: 4px;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}
