@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import './variables.scss';
 @tailwind base;
 @tailwind components;
@@ -9,6 +10,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #222;
+  color: #222;
   font-family: Roboto;
   font-size: $fontBodySize;
 }
@@ -21,13 +23,32 @@ a {
   color: $primaryColor;
 }
 
+.form-group {
+  margin-bottom: 24px;
+}
+
+input {
+  font-size: 16px;
+  padding: 8px 16px;
+  min-width: 350px;
+  min-height: 48px;
+  border: 1px solid #e7e7e7;
+  border-radius: $borderRadiusV1;
+
+  &:focus,
+  &:focus-visible {
+    outline-color: rgba($primaryColor, .25);
+  }
+}
+
 .btn {
-  padding: 8px 30px;
+  padding: 8px 32px;
   min-width: 80px;
-  border-radius: 6px;
+  border-radius: $borderRadiusV1;
   transition: background-color .35s ease-in-out;
   font-weight: 500;
   text-decoration: none !important;
+  cursor: pointer;
 
   &.btn-primary {
     background-color: $primaryColor;
@@ -39,6 +60,44 @@ a {
   }
 }
 
-// a:hover, a:focus {
-//   color: 
-// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Roboto;
+  line-height: 1.25;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+h1, .h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+h2, .h2 {
+  font-size: 33px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+h3, .h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+h4, .h4 {
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+h5, .h5 {
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}

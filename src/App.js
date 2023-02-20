@@ -70,6 +70,7 @@ const App = () => {
                   <Tasks
                     data={taskData}
                     updateData={updateData}
+                    removeTask={removeTask}
                   />
                 }></Route>
               <Route
