@@ -55,13 +55,13 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route
-            path='/'
+            path='/react-task-manager'
             element={<Layout />}>
             <Route
-              index
+              path='/react-task-manager'
               element={<Home data={taskData} />}></Route>
             <Route
-              path='/tasks'
+              path='/react-task-manager/tasks'
               element={
                 <Tasks
                   data={taskData}
@@ -69,7 +69,7 @@ const App = () => {
                 />
               }></Route>
             <Route
-              path='/tasks/:taskId'
+              path='/react-task-manager/tasks/:taskId'
               element={
                 <TaskDetail
                   data={taskData}
@@ -77,7 +77,7 @@ const App = () => {
                 />
               }></Route>
             <Route
-              path='/task/create'
+              path='/react-task-manager/task/create'
               element={
                 <CreateTask
                   data={taskData}
