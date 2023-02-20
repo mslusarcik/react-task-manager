@@ -1,0 +1,18 @@
+.search-wrapper {
+  position: relative;
+  width: auto;
+  display: inline-block;
+  margin-bottom: 0;
+
+  .search-input {
+    padding-right: 42px;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    height: 48px;
+    cursor: pointer;
+  }
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { BsSearch } from 'react-icons/bs';
+import './SearchInput.scss';
 
 const SearchInput = ({ getData, setData }) => {
   console.log('SearchInput component is running.');
@@ -31,12 +33,15 @@ const SearchInput = ({ getData, setData }) => {
   return (
     <div className='search-form-wrapper'>
       <form className='search-form'>
-        <input
-          type='text'
-          placeholder='Hledat..'
-          className='search-input'
-          onChange={(e) => setSearchingText(e.target.value)}
-        />
+        <div className='form-group search-wrapper'>
+          <input
+            type='text'
+            placeholder='Hledat..'
+            className='search-input'
+            onChange={(e) => setSearchingText(e.target.value)}
+          />
+          <BsSearch className='search-icon' />
+        </div>
       </form>
     </div>
   );
