@@ -2,6 +2,7 @@ import React from 'react';
 import RenderTask from '../components/RenderTask';
 import SearchInput from '../components/SearchInput';
 import { useState } from 'react';
+import './Tasks.scss';
 
 const Tasks = ({ data }) => {
   console.log('Tasks component is running.');
@@ -16,11 +17,15 @@ const Tasks = ({ data }) => {
   };
 
   return (
-    <div>
-      <SearchInput
-        getData={data}
-        setData={updateSearchedData}
-      />
+    <section className='tasks-page'>
+      <div className='tasks-header'>
+        <h2>All tasks</h2>
+        <SearchInput
+          getData={data}
+          setData={updateSearchedData}
+        />
+      </div>
+
       <div className='tasks-wrapper'>
         {searchData.map((singleTask) => {
           return (
@@ -33,7 +38,7 @@ const Tasks = ({ data }) => {
         })}
         <p>{!searchData.length && 'Nebylo nic nalezeno...'}</p>
       </div>
-    </div>
+    </section>
   );
 };
 

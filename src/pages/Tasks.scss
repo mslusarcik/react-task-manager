@@ -1,0 +1,15 @@
+@import '../variables.scss';
+
+section.tasks-page {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: $borderRadiusV1;
+  padding: 56px;
+
+  .tasks-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px
+  }
+}
