@@ -3,14 +3,14 @@ import { NavLink, Link } from 'react-router-dom';
 import './Header.scss';
 import Logo from '../assets/images/logo.png';
 
-const Header = () => {
+const Header = ({ homePath }) => {
   console.log('Header component is running.');
   return (
     <header>
       <div className='inner-header'>
         <div className='logo-wrapper'>
           <Link
-            to='/'
+            to={homePath}
             className='flex items-center'>
             <img
               src={Logo}
@@ -25,15 +25,24 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <NavLink to='/'>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to='/tasks'>Tasks</NavLink>
+              <NavLink
+                to={homePath}
+                end>
+                Home
+              </NavLink>
             </li>
             <li>
               <NavLink
-                to='/task/create'
-                className='btn btn-primary'>
+                to={homePath + '/tasks'}
+                end>
+                Tasks
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={homePath + '/task/create'}
+                className='btn btn-primary'
+                end>
                 Create task
               </NavLink>
             </li>

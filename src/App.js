@@ -13,6 +13,7 @@ const App = () => {
   console.log('App component is running.');
   const [taskData, setTaskData] = useState(JSON.parse(localStorage.getItem('msTaskData')));
   const [storageData, setStorageData] = useLocalStorage('msTaskData', '[]');
+  const homePath = '/react-task-manager';
 
   const updateData = (updatedData) => {
     if (updatedData !== null && updatedData !== '[]') {
@@ -55,13 +56,13 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route
-            path='/react-task-manager'
-            element={<Layout />}>
+            path={homePath}
+            element={<Layout homePath={homePath} />}>
             <Route
-              path='/react-task-manager'
+              path={homePath}
               element={<Home data={taskData} />}></Route>
             <Route
-              path='/react-task-manager/tasks'
+              path={homePath + '/tasks'}
               element={
                 <Tasks
                   data={taskData}
@@ -69,7 +70,7 @@ const App = () => {
                 />
               }></Route>
             <Route
-              path='/react-task-manager/tasks/:taskId'
+              path={homePath + '/tasks/:taskId'}
               element={
                 <TaskDetail
                   data={taskData}
@@ -77,7 +78,7 @@ const App = () => {
                 />
               }></Route>
             <Route
-              path='/react-task-manager/task/create'
+              path={homePath + '/task/create'}
               element={
                 <CreateTask
                   data={taskData}
