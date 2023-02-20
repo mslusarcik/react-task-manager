@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-todo-manager/static/css/main.5179cdbc.css",
+    "main.js": "/react-todo-manager/static/js/main.6fde556e.js",
+    "index.html": "/react-todo-manager/index.html",
+    "main.5179cdbc.css.map": "/react-todo-manager/static/css/main.5179cdbc.css.map",
+    "main.6fde556e.js.map": "/react-todo-manager/static/js/main.6fde556e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5179cdbc.css",
+    "static/js/main.6fde556e.js"
+  ]
+}
