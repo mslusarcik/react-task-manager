@@ -1,17 +1,20 @@
 import React from 'react';
+import { taskDataContext } from '../context/TaskDataContext';
+import { useContext } from 'react';
 
-const CompleteTasks = ({ id, tasks, setTasks }) => {
+const CompleteTasks = (props) => {
   console.log('CompleteTasks is running..');
-  if (id) {
-    const updatedData = tasks.map((task) =>
-      task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-    );
+  const { tasks, setTasks } = useContext(taskDataContext);
 
-    // console.log('Updated data> ' + updatedData);
-    setTasks(updatedData);
-  }
+  const setCompleteTask = () => {
+    const updatedTasks = tasks.map((task) => {
+      return task.id === props.taskId ? { ...task, isCompleted: !task.isCompleted } : task;
+    });
 
-  return <></>;
+    setTasks(updatedTasks);
+  };
+
+  return <div onClick={setCompleteTask}>{props.children}</div>;
 };
 
 export default CompleteTasks;
