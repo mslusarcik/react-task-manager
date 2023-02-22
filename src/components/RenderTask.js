@@ -1,23 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { homePathContext } from '../App';
-import { BiChevronRight } from 'react-icons/bi';
-import { BsCircle, BsCheckCircle } from 'react-icons/bs';
+// Import scss
 import './RenderTask.scss';
 
-const RenderTask = ({ id, name, description, isCompleted }) => {
+// Import contexts
+import { homePathContext } from '../context/HomePathContext';
+
+// Import icons
+import { BiChevronRight } from 'react-icons/bi';
+import { BsCircle, BsCheckCircle } from 'react-icons/bs';
+
+// Import other react stuff
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+
+const RenderTask = ({ id, name, description, isCompleted, setCompleteTask }) => {
   console.log('RenderTask component is running.');
+  // Stored contexts
   const homePath = useContext(homePathContext);
-  const completedClass = isCompleted ? ' completed' : '';
+
+  // Stored states
+  const [taskCompleted, setTaskCompleted] = useState(isCompleted);
 
   return (
-    <div className={'task-item' + completedClass}>
-      <BsCircle className='select-icon' />
-      <BsCheckCircle className='select-icon for-completed' />
+    <div className={'task-item' + (taskCompleted ? ' completed' : '')}>
+      <BsCircle
+        className='select-icon'
+        onClick={() => {
+          setCompleteTask(id);
+          setTaskCompleted(!taskCompleted);
+        }}
+      />
+      <BsCheckCircle
+        className='select-icon for-completed'
+        onClick={() => {
+          setCompleteTask(id);
+          setTaskCompleted(!taskCompleted);
+        }}
+      />
       <h3>{name}</h3>
-      <p>{description || 'You didnt write a description..'}</p>
+      <p>{description || 'Cant find a description..'}</p>
       <Link to={`${homePath}/tasks/${id}`}>
         More details <BiChevronRight />
       </Link>

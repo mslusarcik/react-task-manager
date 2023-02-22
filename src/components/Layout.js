@@ -1,8 +1,12 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+// Import scss
+import './Layout.scss';
+
+// Import components
 import Header from './Header';
 import Footer from './Footer';
-import './Layout.scss';
+
+// Import other react stuff
+import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   console.log('Layout component is running.');

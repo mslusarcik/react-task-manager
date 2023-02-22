@@ -1,11 +1,24 @@
-import { Link } from 'react-router-dom';
+// Import components
 import Task from '../components/RenderTask';
-import { useContext } from 'react';
-import { homePathContext } from '../App';
+
+// Import contexts
+import { homePathContext } from '../context/HomePathContext';
+
+// Import other reacts stuff
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 
 const Home = ({ data }) => {
   console.log('Home component is running.');
+  // Stored github path
   const homePath = useContext(homePathContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate(`${homePath}/tasks`);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

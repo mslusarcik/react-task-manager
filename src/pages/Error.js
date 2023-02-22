@@ -1,4 +1,4 @@
-import React from 'react';
+// Import other react stuff
 import { Link } from 'react-router-dom';
 
 const Error = () => {

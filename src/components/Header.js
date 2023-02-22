@@ -1,12 +1,18 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+// Import scss
 import './Header.scss';
+
+// Import assets
 import Logo from '../assets/images/logo.png';
+
+// Import contexts
+import { homePathContext } from '../context/HomePathContext';
+
+// Import other react stuff
+import { NavLink, Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { homePathContext } from '../App';
 
 const Header = () => {
-  console.log('Header component is running.');
+  // Stored github path
   const homePath = useContext(homePathContext);
 
   return (
@@ -14,7 +20,7 @@ const Header = () => {
       <div className='inner-header'>
         <div className='logo-wrapper'>
           <Link
-            to={homePath}
+            to={`${homePath}/tasks`}
             className='flex items-center'>
             <img
               src={Logo}
@@ -28,16 +34,16 @@ const Header = () => {
         </div>
         <nav>
           <ul>
-            <li>
+            {/* TODO: <li>
               <NavLink
-                to={homePath}
+                to={`${homePath}`}
                 end>
                 Home
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
-                to={homePath + '/tasks'}
+                to={`${homePath}/tasks`}
                 end>
                 Tasks
               </NavLink>

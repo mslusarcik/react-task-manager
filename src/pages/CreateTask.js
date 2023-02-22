@@ -1,17 +1,29 @@
+// Import scss
+import './CreateTask.scss';
+
+// Import contexts
+import { homePathContext } from '../context/HomePathContext';
+import { taskDataContext } from '../context/TaskDataContext';
+
+// Import other reacts stuff
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { homePathContext } from '../App';
-import './CreateTask.scss';
 
-const CreateTask = ({ updateData }) => {
+const CreateTask = () => {
   console.log('CreateTask component is running.');
+  // Stored data
+  const { tasks, setTasks } = useContext(taskDataContext);
+  // Stored github path
+  const homePath = useContext(homePathContext);
+  // Input states
   const [nameInput, setNameInput] = useState('');
   const [descInput, setDescInput] = useState('');
+  // Redirect
   const navigate = useNavigate();
-  const homePath = useContext(homePathContext);
 
-  const addNewTask = (e) => {
+  // Get data from form and add them through context
+  const createNewTask = (e) => {
     e.preventDefault();
 
     const updatedData = {
@@ -21,14 +33,19 @@ const CreateTask = ({ updateData }) => {
       isCompleted: false,
     };
 
-    updateData(updatedData);
-    navigate(`${homePath}/tasks`);
+    if (updatedData !== null && updatedData !== '[]') {
+      setTasks([...tasks, updatedData]);
+      navigate(`${homePath}/tasks`);
+    } else {
+      setTasks([updatedData]);
+      navigate(`${homePath}/tasks`);
+    }
   };
 
   return (
     <div className='w-full'>
       <form
-        onSubmit={addNewTask}
+        onSubmit={createNewTask}
         className='create-task-form'>
         <h2>Add new task</h2>
         <div className='form-group'>
@@ -43,15 +60,13 @@ const CreateTask = ({ updateData }) => {
           />
         </div>
         <div className='form-group'>
-          <input
+          <textarea
             name='taskDescription'
-            type='text'
             onChange={(e) => {
               setDescInput(e.target.value);
             }}
             value={descInput}
-            placeholder='Add a task description'
-          />
+            placeholder='Add a task description'></textarea>
         </div>
         <div className='form-group'>
           <input

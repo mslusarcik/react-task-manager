@@ -1,4 +1,4 @@
-import React from 'react';
+// Import scss
 import './Footer.scss';
 
 const Footer = () => {
@@ -6,7 +6,8 @@ const Footer = () => {
   return (
     <footer>
       <span>
-        Made by Miroslav Slusarčík, <a href='/'>github source code</a>.
+        Made by Miroslav Slusarčík,{' '}
+        <a href='https://github.com/mslusarcik/react-task-manager/tree/main'>github source code</a>.
       </span>
     </footer>
   );

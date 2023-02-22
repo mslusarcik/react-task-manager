@@ -27,7 +27,7 @@ a {
   margin-bottom: 24px;
 }
 
-input {
+input, textarea {
   font-size: 16px;
   padding: 8px 16px;
   min-width: 350px;
@@ -39,6 +39,11 @@ input {
   &:focus-visible {
     outline-color: rgba($primaryColor, .25);
   }
+}
+
+textarea {
+  min-height: 200px;
+  max-height: 350px;
 }
 
 .btn {

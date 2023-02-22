@@ -1,16 +1,21 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { BsSearch } from 'react-icons/bs';
+// Import scss
 import './SearchInput.scss';
+
+// Import other reacts stuff
+import { useState, useEffect } from 'react';
+
+// Import icons
+import { BsSearch } from 'react-icons/bs';
 
 const SearchInput = ({ getData, setData }) => {
   console.log('SearchInput component is running.');
+  // Stored states
   const [searchingText, setSearchingText] = useState('');
   const [filteredData, setFilteredData] = useState([...getData]);
 
+  // Updates data by string in input
   useEffect(() => {
     if (searchingText) {
-      console.log('filled');
       const filteredInput = getData.filter((singleTask) => {
         return singleTask.name.toLowerCase().includes(searchingText.toLowerCase());
       });
@@ -21,6 +26,7 @@ const SearchInput = ({ getData, setData }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchingText]);
 
+  // Returns data back to parent component
   useEffect(() => {
     if (searchingText) {
       setData([filteredData]);
@@ -36,7 +42,7 @@ const SearchInput = ({ getData, setData }) => {
         <div className='form-group search-wrapper'>
           <input
             type='text'
-            placeholder='Hledat..'
+            placeholder='Find a task by title..'
             className='search-input'
             onChange={(e) => setSearchingText(e.target.value)}
           />

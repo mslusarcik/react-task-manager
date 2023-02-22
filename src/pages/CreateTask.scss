@@ -24,6 +24,11 @@ main > .inner-content {
         border-color: transparent;
       }
     }
+
+    textarea {
+      width: 100%;
+    }
+
     &:last-child input {
       margin-bottom: 0;
     }

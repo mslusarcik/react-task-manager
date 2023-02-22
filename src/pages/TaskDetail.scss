@@ -1,8 +1,84 @@
-.task-item {
+@import '../variables.scss';
 
-  .link-remove-task {
-    color: red;
-    text-decoration: underline;
-    cursor: pointer;
+.task-detail-section {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: $borderRadiusV1;
+  box-shadow: $boxShadowV1;
+  padding: 56px;
+
+  .task-item {
+    padding-left: 0;
+    border-bottom: 0;
+
+    .task-meta-table {
+      color: $colorGreyV2;
+      color: #C7C7C7;
+      padding: 16px 0;
+      display: block;
+      font-size: 13px;
+
+      tr {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        display: block;
+      }
+
+      th {
+        font-weight: 500;
+
+        svg {
+          display: inline-block;
+          margin-right: 4px;
+          margin-bottom: 1px;
+          width: 13px;
+          height: 13px;
+        }
+      }
+
+      td {
+        font-weight: 400;
+        padding-left: 16px;
+      }
+
+      .tag-item {
+        background-color: orange;
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 6px;
+        margin-right: 8px;
+        font-size: 12px;
+      }
+    }
+
+    .task-description {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+
+    .task-actions {
+      display: flex;
+      justify-content: space-between;
+
+      > span {
+        display: block;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size: 13px;
+        margin-top: 16px;
+
+        &.link-complete-task {
+          font-size: 14px;
+          color: green;
+        }
+
+        &.link-remove-task {
+          color: red;
+        }
+      }
+    }
+
+    
   }
 }
