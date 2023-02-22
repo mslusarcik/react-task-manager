@@ -20,6 +20,7 @@ const Tasks = () => {
 
   // Stored states
   const [searchData, setSearchData] = useState(tasks);
+
   // Stored github path
   const homePath = useContext(homePathContext);
 

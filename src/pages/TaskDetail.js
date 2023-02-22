@@ -1,8 +1,13 @@
 // Import scss
 import './TaskDetail.scss';
 
+// Import components
+import RemoveTask from '../components/RemoveTask';
+import CompleteTasks from '../components/CompleteTasks';
+
 // Import contexts
 import { homePathContext } from '../context/HomePathContext';
+import { taskDataContext } from '../context/TaskDataContext';
 
 // Import icons
 import { BsCalendarDate, BsTags } from 'react-icons/bs';
@@ -12,13 +17,16 @@ import { BiTime } from 'react-icons/bi';
 import { useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-const TaskDetail = ({ data, removeTask }) => {
+const TaskDetail = ({ removeTask }) => {
   console.log('TaskDetail component is running.');
   // Stores react hooks
   const { taskId } = useParams();
   const navigate = useNavigate();
+
   // Stores contexts
   const homePath = useContext(homePathContext);
+  const { tasks, setTasks } = useContext(taskDataContext);
+
   // Stores other variables
   const currentDate = new Date();
   const day = currentDate.getDate();
@@ -27,7 +35,7 @@ const TaskDetail = ({ data, removeTask }) => {
   const year = currentDate.getFullYear();
 
   // Returns task its going to render
-  const specificTask = data.find((task) => {
+  const specificTask = tasks.find((task) => {
     return task.id === parseInt(taskId);
   });
 
@@ -97,13 +105,17 @@ const TaskDetail = ({ data, removeTask }) => {
           </div>
           <hr />
           <div className='task-actions'>
-            <span className='link-complete-task'>Complete task | #TODO</span>
-            <span
-              className='link-remove-task'
-              onClick={() => {
-                handleRemoveTask(specificTask.id);
-              }}>
-              Remove task
+            <CompleteTasks taskId={specificTask.id}>
+              <span
+                className='link-complete-task'
+                onClick={() => {
+                  navigate(`${homePath}/tasks`);
+                }}>
+                {specificTask.isCompleted ? 'Set as uncompleted' : 'Complete task'}
+              </span>
+            </CompleteTasks>
+            <span className='link-remove-task'>
+              <RemoveTask taskId={specificTask.id}></RemoveTask>
             </span>
           </div>
         </div>
