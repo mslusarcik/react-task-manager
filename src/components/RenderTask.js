@@ -4,6 +4,9 @@ import './RenderTask.scss';
 // Import contexts
 import { homePathContext } from '../context/HomePathContext';
 
+// Import components
+import CompleteTasks from './CompleteTasks';
+
 // Import icons
 import { BiChevronRight } from 'react-icons/bi';
 import { BsCircle, BsCheckCircle } from 'react-icons/bs';
@@ -23,23 +26,29 @@ const RenderTask = ({ id, name, description, isCompleted, setCompleteTask }) => 
 
   return (
     <div className={'task-item' + (taskCompleted ? ' completed' : '')}>
-      <BsCircle
-        className='select-icon'
-        onClick={() => {
-          setCompleteTask(id);
-          setTaskCompleted(!taskCompleted);
-        }}
-      />
-      <BsCheckCircle
-        className='select-icon for-completed'
-        onClick={() => {
-          setCompleteTask(id);
-          setTaskCompleted(!taskCompleted);
-        }}
-      />
-      <h3>{name}</h3>
-      <p>{description || 'Cant find a description..'}</p>
-      <Link to={`${homePath}/tasks/${id}`}>
+      <div className='task-content'>
+        <CompleteTasks taskId={id}>
+          <BsCircle
+            className='select-icon'
+            onClick={() => {
+              setTaskCompleted(!taskCompleted);
+            }}
+          />
+        </CompleteTasks>
+        <CompleteTasks taskId={id}>
+          <BsCheckCircle
+            className='select-icon for-completed'
+            onClick={() => {
+              setTaskCompleted(!taskCompleted);
+            }}
+          />
+        </CompleteTasks>
+        <h3>{name}</h3>
+        <p>{description || 'Cant find a description..'}</p>
+      </div>
+      <Link
+        to={`${homePath}/tasks/${id}`}
+        className='more-details-link'>
         More details <BiChevronRight />
       </Link>
     </div>

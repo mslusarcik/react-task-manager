@@ -13,20 +13,27 @@
 
   &.completed {
 
-    * {
-      text-decoration: line-through;
-      color: #33691D;
-      fill: #33691D;
+    .task-content {
       opacity: .25;
+      text-decoration: line-through;
+      
+
+      h1, h2, h3, h4, h5, div, span, p, svg {
+        color: #33691D;
+        fill: #33691D;
+      }
     }
 
-    a,
     svg.select-icon {
       display: none;
     }
 
     svg.select-icon.for-completed {
       display: block;
+    }
+
+    a.more-details-link {
+      text-decoration: none;
     }
   }
 
