@@ -4,6 +4,7 @@ import TaskDetail from './pages/TaskDetail';
 import Error from './pages/Error';
 import Home from './pages/Home';
 import CreateTask from './pages/CreateTask';
+import UpdateTask from './pages/UpdateTask';
 
 // Import components
 import Layout from './components/Layout';
@@ -22,36 +23,15 @@ import { useState, useEffect, useContext } from 'react';
 const App = () => {
   console.log('App component is running.');
   // States
-  const [taskData, setTaskData] = useState(JSON.parse(localStorage.getItem('msTaskData')));
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('msTaskData')));
   // Custom hooks
   const [storageData, setStorageData] = useLocalStorage('msTaskData', '[]');
   // Github path
   const homePath = useContext(homePathContext);
 
-  // Updates tasks
-  const updateData = (updatedData) => {
-    if (updatedData !== null && updatedData !== '[]') {
-      setTaskData([...taskData, updatedData]);
-    } else {
-      setTaskData([updatedData]);
-    }
-  };
-
-  // Removes task by its id
-  const removeTask = (taskId) => {
-    const filteredData = taskData.filter((specificTask) => {
-      return parseInt(specificTask.id) !== parseInt(taskId);
-    });
-    // console.log(filteredData);
-    // console.log('------Setting new data------');
-    setTaskData(filteredData);
-  };
-
-  if (taskData === null) {
-    // console.log('Task data:');
-    // console.log(taskData);
-    setTaskData(storageData);
+  // Prevent tasks from being empty
+  if (tasks === null && storageData.length < 1) {
+    setTasks([]);
   }
 
   // Updates localStorage with fresh datas
@@ -72,33 +52,19 @@ const App = () => {
               <Route
                 index
                 path={homePath}
-                element={<Home data={taskData} />}></Route>
+                element={<Home />}></Route>
               <Route
                 path={homePath + '/tasks'}
-                element={
-                  <Tasks
-                    data={taskData}
-                    updateData={updateData}
-                    removeTask={removeTask}
-                    // completeData={completeData}
-                  />
-                }></Route>
+                element={<Tasks />}></Route>
               <Route
                 path={homePath + '/tasks/:taskId'}
-                element={
-                  <TaskDetail
-                    data={taskData}
-                    removeTask={removeTask}
-                  />
-                }></Route>
+                element={<TaskDetail />}></Route>
               <Route
                 path={homePath + '/task/create'}
-                element={
-                  <CreateTask
-                    data={taskData}
-                    updateData={updateData}
-                  />
-                }></Route>
+                element={<CreateTask />}></Route>
+              <Route
+                path={homePath + '/task/update/:taskId'}
+                element={<UpdateTask />}></Route>
               <Route
                 path='*'
                 element={<Error />}></Route>
