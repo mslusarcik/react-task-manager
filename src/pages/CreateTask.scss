@@ -1,8 +1,10 @@
 @import '../variables.scss';
+@import 'react-datepicker/dist/react-datepicker.css';
 
 main > .inner-content {
   @media (min-width: $breakpoint-lg) {
-    padding-top: 136px
+    padding-top: 136px;
+    padding-bottom: 136px
   }
 }
 

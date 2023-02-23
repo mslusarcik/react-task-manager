@@ -1,6 +1,10 @@
 // Import scss
 import './CreateTask.scss';
 
+// Import external components
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 // Import contexts
 import { homePathContext } from '../context/HomePathContext';
 import { taskDataContext } from '../context/TaskDataContext';
@@ -19,6 +23,8 @@ const CreateTask = () => {
   // Input states
   const [nameInput, setNameInput] = useState('');
   const [descInput, setDescInput] = useState('');
+  const [deadlineDate, setDeadlineDate] = useState();
+  const [tags, setTags] = useState('');
   // Redirect
   const navigate = useNavigate();
 
@@ -26,10 +32,18 @@ const CreateTask = () => {
   const createNewTask = (e) => {
     e.preventDefault();
 
+    const splitTags = (tags) => {
+      const tagsArray = tags.split(',');
+      return tagsArray;
+    };
+
     const updatedData = {
       id: Date.now(),
+      created: Date.now(),
+      deadline: deadlineDate.getTime(),
       name: nameInput,
       description: descInput,
+      tags: splitTags(tags),
       isCompleted: false,
     };
 
@@ -57,6 +71,25 @@ const CreateTask = () => {
             }}
             value={nameInput}
             placeholder='Add a task name'
+          />
+        </div>
+        <div className='form-group'>
+          <DatePicker
+            selected={deadlineDate}
+            onChange={(date) => setDeadlineDate(date)}
+            placeholderText='Set a deadline for your task'
+            dateFormat={'dd. MM. y'}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            name='taskTags'
+            type='text'
+            onChange={(e) => {
+              setTags(e.target.value);
+            }}
+            value={tags}
+            placeholder='Add tags separated by comma'
           />
         </div>
         <div className='form-group'>
