@@ -4,20 +4,22 @@ import './TaskDetail.scss';
 // Import components
 import RemoveTask from '../components/RemoveTask';
 import CompleteTasks from '../components/CompleteTasks';
+import ConvertTimestamp from '../components/ConvertTimestamp';
 
 // Import contexts
 import { homePathContext } from '../context/HomePathContext';
 import { taskDataContext } from '../context/TaskDataContext';
 
 // Import icons
-import { BsCalendarDate, BsTags } from 'react-icons/bs';
+import { BsCalendarDate, BsTags, BsCheck2Circle, BsTrash } from 'react-icons/bs';
 import { BiTime } from 'react-icons/bi';
+import { FiEdit } from 'react-icons/fi';
 
 // Import other react stuff
 import { useEffect, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-const TaskDetail = ({ removeTask }) => {
+const TaskDetail = () => {
   console.log('TaskDetail component is running.');
   // Stores react hooks
   const { taskId } = useParams();
@@ -25,25 +27,12 @@ const TaskDetail = ({ removeTask }) => {
 
   // Stores contexts
   const homePath = useContext(homePathContext);
-  const { tasks, setTasks } = useContext(taskDataContext);
-
-  // Stores other variables
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const ddl = currentDate.getDate() + 7;
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
+  const { tasks } = useContext(taskDataContext);
 
   // Returns task its going to render
   const specificTask = tasks.find((task) => {
     return task.id === parseInt(taskId);
   });
-
-  // Removes task and redirects to /tasks page
-  const handleRemoveTask = (taskId) => {
-    removeTask(taskId);
-    navigate(`${homePath}/tasks`);
-  };
 
   // Checks existing id or throws 404 page
   useEffect(() => {
@@ -61,34 +50,73 @@ const TaskDetail = ({ removeTask }) => {
   });
 
   if (specificTask) {
+    const tags = specificTask.tags;
+    console.log(tags);
     return (
       <section className='task-detail-section'>
         <div
           key={specificTask.id}
           className='task-item'>
-          <h2 className='h3'>{specificTask.name}</h2>
+          <div className='task-heading'>
+            <h2 className='h3'>{specificTask.name}</h2>
+            <div className='task-actions'>
+              <div>
+                <span className='link-edit-task'>
+                  <Link to={`${homePath}/task/update/${specificTask.id}`}>
+                    <FiEdit></FiEdit>
+                  </Link>
+                </span>
+              </div>
+              <CompleteTasks taskId={specificTask.id}>
+                <span
+                  className='link-complete-task'
+                  onClick={() => {
+                    navigate(`${homePath}/tasks`);
+                  }}>
+                  {specificTask.isCompleted ? 'Set as uncompleted' : <BsCheck2Circle></BsCheck2Circle>}
+                </span>
+              </CompleteTasks>
+
+              <RemoveTask taskId={specificTask.id}>
+                <span className='link-remove-task'>
+                  <BsTrash className='remove-icon' />
+                </span>
+              </RemoveTask>
+            </div>
+          </div>
           <hr />
           <table className='task-meta-table'>
             <tbody>
               <tr>
                 <th scope='row'>
-                  <BsCalendarDate /> Created:{' '}
-                </th>
-                <td>{day + '. ' + month + '. ' + year} | #TODO</td>
-              </tr>
-              <tr>
-                <th scope='row'>
-                  <BiTime /> Deadline:{' '}
-                </th>
-                <td>{ddl + '. ' + month + '. ' + year} | #TODO</td>
-              </tr>
-              <tr>
-                <th scope='row'>
-                  <BsTags /> Tags:{' '}
+                  <BsCalendarDate /> Created:
                 </th>
                 <td>
-                  <span className='tag-item'>Webdesign</span>
-                  <span className='tag-item'>Jaknaeshop</span>| #TODO
+                  <ConvertTimestamp
+                    timestamp={specificTask.created}
+                    time={true}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  <BiTime /> Deadline:
+                </th>
+                <td>
+                  <ConvertTimestamp
+                    timestamp={specificTask.deadline}
+                    time={false}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th scope='row'>
+                  <BsTags /> Tags:
+                </th>
+                <td>
+                  {tags.map((singleTag) => {
+                    return <span className='tag-item'>{singleTag}</span>;
+                  })}
                 </td>
               </tr>
             </tbody>
@@ -97,27 +125,13 @@ const TaskDetail = ({ removeTask }) => {
           <div className='task-description'>
             <h3>Task description</h3>
             <p>{specificTask.description}</p>
-            <Link
-              to={`${homePath}/tasks/`}
-              className='btn btn-primary'>
-              Back to all tasks
-            </Link>
           </div>
           <hr />
-          <div className='task-actions'>
-            <CompleteTasks taskId={specificTask.id}>
-              <span
-                className='link-complete-task'
-                onClick={() => {
-                  navigate(`${homePath}/tasks`);
-                }}>
-                {specificTask.isCompleted ? 'Set as uncompleted' : 'Complete task'}
-              </span>
-            </CompleteTasks>
-            <span className='link-remove-task'>
-              <RemoveTask taskId={specificTask.id}></RemoveTask>
-            </span>
-          </div>
+          <Link
+            to={`${homePath}/tasks/`}
+            className='mt-5 w-full text-right inline-block'>
+            Back to all tasks
+          </Link>
         </div>
       </section>
     );

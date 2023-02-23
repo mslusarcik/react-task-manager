@@ -12,6 +12,17 @@
     padding-left: 0;
     border-bottom: 0;
 
+    .task-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+
+      h2 {
+        margin-bottom: 0;
+      }
+    }
+
     .task-meta-table {
       color: $colorGreyV2;
       color: #C7C7C7;
@@ -27,6 +38,7 @@
 
       th {
         font-weight: 500;
+        min-width: 75px;
 
         svg {
           display: inline-block;
@@ -65,16 +77,39 @@
         display: block;
         text-decoration: underline;
         cursor: pointer;
-        font-size: 13px;
-        margin-top: 16px;
+        font-size: 20px;
+        margin: 0 5px;
+        padding: 0 5px;
+        color: $colorGreyV2;
+        transition: color .25s ease-in-out;
+
+        
+
+        &.link-edit-task {
+          a {
+            transition: color .25s ease-in-out;
+            color: $colorGreyV2;
+            font-size: 18px;
+          }
+          &:hover a {
+            color: orange;
+            &:hover {
+              color: orange;
+            }
+          }
+        }
 
         &.link-complete-task {
-          font-size: 14px;
-          color: green;
+          &:hover {
+            color: green;
+          }
         }
 
         &.link-remove-task {
-          color: red;
+
+          &:hover {
+            color: red;
+          }
         }
       }
     }
