@@ -31,6 +31,8 @@ header {
     ul {
       list-style-type: none;
       display: flex;
+      align-items: center;
+      
       li {
         @media (min-width: $breakpoint-lg) {
           margin: 0 10px;
